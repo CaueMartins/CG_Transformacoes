@@ -1,3 +1,4 @@
+#Importações
 import pygame
 from pygame.locals import *
 from OpenGL.GL import *
@@ -15,6 +16,7 @@ drawing_color = (1, 1, 1, 1)
 screen = pygame.display.set_mode((screen_width, screen_height), DOUBLEBUF | OPENGL)
 pygame.display.set_caption('Cubo')
 
+#Início de Background/Cores
 def initialise():
     glClearColor(*background_color)
     glColor(*drawing_color)
@@ -37,10 +39,12 @@ scales = [0.5, 0.7, 0.9, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0]
 
 index = 0 
 
+#Desenhando o cubo
 def drawCube(x, y, scale, mirrored=False):
     glPushMatrix()
     glTranslatef(x, y, -5)  #Translação
-    
+
+#Desenhando o cubo invertido pra espelhamento  
     if mirrored:
         glScalef(scale, -scale, scale)  #Espelhamento no eixo Y
     else:
@@ -50,6 +54,7 @@ def drawCube(x, y, scale, mirrored=False):
     wireCube()
     glPopMatrix()
 
+#Display
 def display():
     global index
 
@@ -66,6 +71,7 @@ def display():
     if index >= len(positions_x):  
         index = len(positions_x) - 1  #Mantém último estágio
 
+#Acabar o código quando apertar no X da janela
 fim = False
 initialise()
 while not fim:
@@ -75,6 +81,6 @@ while not fim:
 
     display()
     pygame.display.flip()
-    pygame.time.wait(600)  
+    pygame.time.wait(300)  
 
 pygame.quit()
